@@ -100,7 +100,7 @@ function saveAsPDF() {
 // QR Code for GitHub Page
 function generateQRCode() {
 	const qrCodeElement = document.getElementById("qr-code");
-	const githubUrl = "YOUR_GITHUB_PAGE_URL"; // Replace with your GitHub Page link
+	const githubUrl = "https://kianlin.github.io/hpsi-party-bingo/"; // Replace with your GitHub Page link
 	const qrCodeImg = new Image();
 	qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
 		githubUrl
