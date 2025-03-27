@@ -48,6 +48,12 @@ function generateBingo() {
 		.fill()
 		.map(() => Array(5).fill(false));
 
+	// Hide the "Generate Bingo Card" button
+	document.getElementById("generate-button").style.display = "none";
+
+	// Hide the QR code after generating the Bingo card
+	document.getElementById("qr-code").style.display = "none";
+
 	// Show the bingo callout
 	document.getElementById("bingo-callout").style.display = "none"; // Hide initially
 	document.getElementById("bingo-callout").innerHTML = "";
@@ -100,7 +106,7 @@ function saveAsPDF() {
 // QR Code for GitHub Page
 function generateQRCode() {
 	const qrCodeElement = document.getElementById("qr-code");
-	const githubUrl = "https://kianlin.github.io/hpsi-party-bingo/"; // Replace with your GitHub Page link
+	const githubUrl = "YOUR_GITHUB_PAGE_URL"; // Replace with your GitHub Page link
 	const qrCodeImg = new Image();
 	qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
 		githubUrl
