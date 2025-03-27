@@ -77,41 +77,86 @@ function toggleCell(row, col) {
 	checkBingo();
 }
 
+// function checkBingo() {
+// 	let bingoLines = 0;
+
+// 	// Check rows and columns for bingo
+// 	for (let i = 0; i < 5; i++) {
+// 		if (selectedCells[i].every((cell) => cell)) bingoLines++; // Horizontal line
+// 		if (selectedCells.every((row) => row[i])) bingoLines++; // Vertical line
+// 	}
+
+// 	// Check diagonals for bingo
+// 	if ([0, 1, 2, 3, 4].every((i) => selectedCells[i][i])) bingoLines++; // Diagonal top-left to bottom-right
+// 	if ([0, 1, 2, 3, 4].every((i) => selectedCells[i][4 - i])) bingoLines++; // Diagonal top-right to bottom-left
+
+// 	if (bingoLines > 0) {
+// 		document.getElementById("bingo-callout").style.display = "block";
+// 		document.getElementById(
+// 			"bingo-callout"
+// 		).innerHTML = `BINGO! ${bingoLines} line(s) formed.`;
+// 	}
+// }
+
+// Check Bingo status (Horizontal, Vertical, Diagonal)
 function checkBingo() {
-	let bingoLines = 0;
+	let bingoCount = 0; // Track the number of Bingo lines formed
 
-	// Check rows and columns for bingo
-	for (let i = 0; i < 5; i++) {
-		if (selectedCells[i].every((cell) => cell)) bingoLines++; // Horizontal line
-		if (selectedCells.every((row) => row[i])) bingoLines++; // Vertical line
+	// Check horizontal lines
+	for (let row = 0; row < 5; row++) {
+		if (selectedCells[row].every((cell) => cell)) {
+			bingoCount++; // Count a horizontal Bingo line
+		}
 	}
 
-	// Check diagonals for bingo
-	if ([0, 1, 2, 3, 4].every((i) => selectedCells[i][i])) bingoLines++; // Diagonal top-left to bottom-right
-	if ([0, 1, 2, 3, 4].every((i) => selectedCells[i][4 - i])) bingoLines++; // Diagonal top-right to bottom-left
+	// Check vertical lines
+	for (let col = 0; col < 5; col++) {
+		if (selectedCells.every((row) => row[col])) {
+			bingoCount++; // Count a vertical Bingo line
+		}
+	}
 
-	if (bingoLines > 0) {
-		document.getElementById("bingo-callout").style.display = "block";
-		document.getElementById(
-			"bingo-callout"
-		).innerHTML = `BINGO! ${bingoLines} line(s) formed.`;
+	// Check diagonal lines (top-left to bottom-right)
+	if (selectedCells.every((row, index) => row[index])) {
+		bingoCount++; // Count the top-left to bottom-right diagonal Bingo
+	}
+
+	// Check diagonal lines (top-right to bottom-left)
+	if (selectedCells.every((row, index) => row[4 - index])) {
+		bingoCount++; // Count the top-right to bottom-left diagonal Bingo
+	}
+
+	// Update the callout text based on the Bingo count
+	if (bingoCount > 0) {
+		showBingo(bingoCount); // Display "BINGO!" with the number of lines formed
+	} else {
+		document.getElementById("bingo-callout").style.display = "none";
+		document.getElementById("bingo-callout").innerHTML = "No Bingo yet"; // If no Bingo
 	}
 }
 
-function saveAsPDF() {
-	const { jsPDF } = window.jspdf;
-	const doc = new jsPDF();
-
-	const gridElement = document.getElementById("bingo-grid");
-	doc.html(gridElement, {
-		callback: function (doc) {
-			doc.save("bingo_card.pdf");
-		},
-		margin: [10, 10],
-		x: 10,
-		y: 10,
-	});
+// Display Bingo callout with "BINGO!" and the number of lines formed
+function showBingo(bingoCount) {
+	document.getElementById("bingo-callout").style.display = "block";
+	document.getElementById(
+		"bingo-callout"
+	).innerHTML = `BINGO! ${bingoCount} line(s) formed!`;
 }
+
+// function saveAsPDF() {
+// 	const { jsPDF } = window.jspdf;
+// 	const doc = new jsPDF();
+
+// 	const gridElement = document.getElementById("bingo-grid");
+// 	doc.html(gridElement, {
+// 		callback: function (doc) {
+// 			doc.save("bingo_card.pdf");
+// 		},
+// 		margin: [10, 10],
+// 		x: 10,
+// 		y: 10,
+// 	});
+// }
 
 // QR Code for GitHub Page
 function generateQRCode() {
@@ -129,17 +174,15 @@ function generateQRCode() {
 }
 
 // Function to capture the screenshot and allow image download
-function captureScreenshotAndDownload() {
-	html2canvas(document.body).then((canvas) => {
-		// Create an image from the canvas
-		const imageUrl = canvas.toDataURL("image/png");
-
-		// Create a download link
-		const link = document.createElement("a");
-		link.href = imageUrl;
-		link.download = "bingo_card.png";
-
-		// Trigger download
-		link.click();
-	});
-}
+// function captureScreenshotAndDownload() {
+// 	html2canvas(document.body).then((canvas) => {
+// 		// Create an image from the canvas
+// 		const imageUrl = canvas.toDataURL("image/png");
+// 		// Create a download link
+// 		const link = document.createElement("a");
+// 		link.href = imageUrl;
+// 		link.download = "bingo_card.png";
+// 		// Trigger download
+// 		link.click();
+// 	});
+// }

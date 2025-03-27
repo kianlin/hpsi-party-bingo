@@ -1,98 +1,140 @@
+/* General Styles */
 body {
-	font-family: Arial, sans-serif;
+	font-family: Verdana, sans-serif;
+	margin: 0;
+	padding: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
-	margin: 0;
 	background-color: #f4f4f4;
-	position: relative;
+	min-height: 100vh;
+	flex-direction: column;
 	text-align: center;
 }
 
-.container {
-	max-width: 90%; /* Allow some flexibility on small screens */
-	width: 350px; /* Maintain a good width on larger screens */
-	margin: 0 auto;
+/* Container for everything */
+#container {
+	width: 100%;
+	max-width: 900px;
+	margin: 20px auto;
+	padding: 20px;
+	box-sizing: border-box;
 }
 
+/* Header */
+h1 {
+	font-size: 2.5rem;
+	color: #333;
+	margin-bottom: 20px;
+}
+
+/* QR Code Positioning */
 #qr-code {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	display: none; /* Initially hidden */
+	display: block; /* Initially visible */
 }
 
-.bingo-grid {
+/* Bingo Grid Layout */
+#bingo-grid {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	grid-template-rows: repeat(5, 1fr);
-	gap: 5px;
-	margin: 20px auto;
-	width: 100%; /* Take up available width */
-	max-width: 350px;
-	border: none;
-	text-align: center;
+	gap: 10px;
+	margin-top: 30px;
 	padding: 10px;
+	border: none; /* Remove the border initially */
 }
 
-.bingo-grid div {
+/* Individual grid items (cells) */
+#bingo-grid div {
+	background-color: #fff;
+	padding: 20px;
+	font-size: 1.2rem;
+	border: 2px solid #ddd;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #e0e0e0;
-	border: 1px solid #ccc;
-	font-size: 14px;
-	text-align: center;
-	padding: 5px;
+	height: 100px;
 	cursor: pointer;
+	transition: background-color 0.3s ease, color 0.3s ease;
 	word-wrap: break-word;
-	font-size: 12px;
+	text-align: center;
 }
 
-.bingo-grid div.selected {
-	background-color: blue;
+/* Highlight when a cell is selected */
+#bingo-grid div.selected {
+	background-color: #1e90ff;
 	color: white;
 }
 
+/* Button Styling */
 button {
-	padding: 10px 20px;
-	background-color: #4caf50;
-	color: white;
-	border: none;
+	margin-top: 20px;
+	padding: 20px 40px;
+	font-size: 1.2rem;
 	cursor: pointer;
-	font-size: 16px;
-	margin: 10px 0;
+	border: none;
+	background-color: #28a745;
+	color: white;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
 }
 
 button:hover {
-	background-color: #45a049;
+	background-color: #218838;
 }
 
+/* Bingo Callout Styling (Green Box) */
 #bingo-callout {
-	background-color: #006400; /* Dark green */
+	font-size: 1.5rem;
 	color: white;
-	padding: 10px;
-	font-size: 18px;
-	font-weight: bold;
-	display: none;
-}
-
-#bingo-message {
 	margin-top: 20px;
-	font-size: 18px;
-	font-weight: bold;
-	color: #333;
+	background-color: #28a745;
+	padding: 10px 20px;
+	border-radius: 5px;
+	display: none; /* Hidden by default, shown when Bingo is achieved */
 }
 
+/* Mobile Responsiveness */
 @media (max-width: 600px) {
-	.bingo-grid {
-		grid-template-columns: repeat(5, 1fr); /* Ensure it stays 5 columns */
+	#bingo-grid {
+		grid-template-columns: repeat(5, 1fr);
+		grid-template-rows: repeat(5, 1fr);
+		gap: 8px;
+	}
+
+	#bingo-grid div {
+		font-size: 1rem;
+		padding: 10px;
+		height: 70px;
+	}
+
+	button {
+		width: 100%;
+	}
+}
+
+/* Center the elements and make sure everything looks clean */
+@media (max-width: 500px) {
+	h1 {
+		font-size: 2rem;
+	}
+
+	#bingo-grid {
+		grid-template-columns: repeat(5, 1fr);
 		grid-template-rows: repeat(5, 1fr);
 	}
 
-	.bingo-grid div {
-		font-size: 12px; /* Reduce font size on mobile */
-		padding: 10px; /* Increase padding for better touch interaction */
+	button {
+		font-size: 1rem;
+		padding: 12px;
+	}
+
+	#bingo-grid div {
+		font-size: 1rem;
+		padding: 8px;
+		height: 60px;
 	}
 }
