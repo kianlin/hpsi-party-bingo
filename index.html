@@ -10,11 +10,12 @@
 		<div class="container">
 			<h1>Bingo Generator</h1>
 			<button onclick="generateBingo()">Generate Bingo Card</button>
-			<div id="bingo-grid" class="bingo-grid">
-				<!-- Bingo grid will be generated here -->
-			</div>
+			<div id="bingo-grid" class="bingo-grid"></div>
+			<div id="bingo-message"></div>
+			<button onclick="saveAsPDF()">Save Bingo Card as PDF</button>
 		</div>
 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 		<script src="script.js"></script>
 	</body>
 </html>
