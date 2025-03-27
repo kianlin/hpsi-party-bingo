@@ -1,42 +1,30 @@
-const facts = [
-	"Has a pet",
-	"Can solve Rubik's cube",
-	"Has broken a bone",
-	"Has studied abroad",
-	"Takes cold showers",
-	"Has climbed a mountain",
-	"Has more than two siblings",
-	"Can do mental math quickly",
-	"Has been on TV",
-	"Has donated blood",
-	"Goes to gym 3x a week",
-	"Has written a song",
-	"Has achieved a personal goal",
-	"Can speak in different accents",
-	"Has been skiing",
-	"Has food allergy",
-	"Has performed CPR",
-	"Lives alone",
-	"Has won money in a lottery",
-	"Can do a headstand",
-	"Has been published",
-	"Has organised an event",
-	"Has been on a cruise",
-	"Can roll their tongue",
-	"Has eaten at a Michelin star restaurant",
-];
-
+let facts = [];
 let bingoGrid = [];
 let selectedCells = Array(5)
 	.fill()
 	.map(() => Array(5).fill(false));
 
+window.onload = function () {
+	// Load facts from the external JSON file
+	fetch("facts.json")
+		.then((response) => response.json())
+		.then((data) => {
+			facts = data.facts;
+		})
+		.catch((error) => console.error("Error loading facts:", error));
+};
+
 function generateBingo() {
+	if (facts.length === 0) {
+		alert("Facts not loaded yet!");
+		return;
+	}
+
 	const selectedFacts = [];
 	let gridHTML = "";
 
-	// Randomly pick 24 facts from the facts array
-	while (selectedFacts.length < 24) {
+	// Randomly pick 25 facts from the facts array
+	while (selectedFacts.length < 25) {
 		const randomIndex = Math.floor(Math.random() * facts.length);
 		const randomFact = facts[randomIndex];
 
@@ -45,21 +33,24 @@ function generateBingo() {
 		}
 	}
 
-	// Center cell
-	selectedFacts.splice(12, 0, "Center Fact");
-
 	// Create bingo grid with facts
 	for (let i = 0; i < 5; i++) {
 		for (let j = 0; j < 5; j++) {
-			const fact = selectedFacts.pop();
-			gridHTML += `<div onclick="toggleCell(${i}, ${j})">${fact}</div>`;
+			gridHTML += `<div onclick="toggleCell(${i}, ${j})">${selectedFacts.pop()}</div>`;
 		}
 	}
 
-	// Insert grid into the page
+	// Insert grid into the page and display border
 	document.getElementById("bingo-grid").innerHTML = gridHTML;
+	document.getElementById("bingo-grid").style.border = "5px solid #000"; // Outer border only after generation
 	bingoGrid = selectedFacts;
-	document.getElementById("bingo-message").textContent = "";
+	selectedCells = Array(5)
+		.fill()
+		.map(() => Array(5).fill(false));
+
+	// Show the bingo callout
+	document.getElementById("bingo-callout").style.display = "none"; // Hide initially
+	document.getElementById("bingo-callout").innerHTML = "";
 }
 
 function toggleCell(row, col) {
@@ -84,9 +75,10 @@ function checkBingo() {
 	if ([0, 1, 2, 3, 4].every((i) => selectedCells[i][4 - i])) bingoLines++; // Diagonal top-right to bottom-left
 
 	if (bingoLines > 0) {
+		document.getElementById("bingo-callout").style.display = "block";
 		document.getElementById(
-			"bingo-message"
-		).textContent = `BINGO! ${bingoLines} line(s) formed.`;
+			"bingo-callout"
+		).innerHTML = `BINGO! ${bingoLines} line(s) formed.`;
 	}
 }
 
@@ -104,3 +96,17 @@ function saveAsPDF() {
 		y: 10,
 	});
 }
+
+// QR Code for GitHub Page
+function generateQRCode() {
+	const qrCodeElement = document.getElementById("qr-code");
+	const githubUrl = "YOUR_GITHUB_PAGE_URL"; // Replace with your GitHub Page link
+	const qrCodeImg = new Image();
+	qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
+		githubUrl
+	)}`;
+	qrCodeElement.appendChild(qrCodeImg);
+}
+
+// Call the QR Code generation when the page loads
+generateQRCode();

@@ -6,10 +6,17 @@ body {
 	height: 100vh;
 	margin: 0;
 	background-color: #f4f4f4;
+	position: relative;
 }
 
 .container {
 	text-align: center;
+}
+
+#qr-code {
+	position: absolute;
+	top: 10px;
+	right: 10px;
 }
 
 .bingo-grid {
@@ -19,12 +26,12 @@ body {
 	gap: 5px;
 	max-width: 350px;
 	margin: 20px auto;
-	border: 5px solid #000; /* Outer thick border */
+	border: none;
 }
 
 .bingo-grid div {
-	width: 50px;
-	height: 50px;
+	width: 60px;
+	height: 60px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -34,6 +41,8 @@ body {
 	text-align: center;
 	padding: 5px;
 	cursor: pointer;
+	word-wrap: break-word;
+	font-size: 12px;
 }
 
 .bingo-grid div.selected {
@@ -52,6 +61,15 @@ button {
 
 button:hover {
 	background-color: #45a049;
+}
+
+#bingo-callout {
+	background-color: #006400; /* Dark green */
+	color: white;
+	padding: 10px;
+	font-size: 18px;
+	font-weight: bold;
+	display: none;
 }
 
 #bingo-message {
