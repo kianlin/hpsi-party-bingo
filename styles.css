@@ -17,8 +17,9 @@ body {
 	grid-template-columns: repeat(5, 1fr);
 	grid-template-rows: repeat(5, 1fr);
 	gap: 5px;
-	max-width: 300px;
+	max-width: 350px;
 	margin: 20px auto;
+	border: 5px solid #000; /* Outer thick border */
 }
 
 .bingo-grid div {
@@ -32,6 +33,12 @@ body {
 	font-size: 14px;
 	text-align: center;
 	padding: 5px;
+	cursor: pointer;
+}
+
+.bingo-grid div.selected {
+	background-color: blue;
+	color: white;
 }
 
 button {
@@ -45,4 +52,11 @@ button {
 
 button:hover {
 	background-color: #45a049;
+}
+
+#bingo-message {
+	margin-top: 20px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #333;
 }
