@@ -1,25 +1,34 @@
+/* General Styles */
 body {
 	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
-	margin: 0;
 	background-color: #f4f4f4;
+	min-height: 100vh;
+	flex-direction: column;
 	text-align: center;
 }
 
+/* Container for everything */
 #container {
-	width: 80%;
-	max-width: 800px;
-	margin: 0 auto;
+	width: 100%;
+	max-width: 900px;
+	margin: 20px auto;
+	padding: 20px;
+	box-sizing: border-box;
 }
 
+/* Header */
 h1 {
 	font-size: 2.5rem;
 	color: #333;
+	margin-bottom: 20px;
 }
 
+/* QR Code Positioning */
 #qr-code {
 	position: absolute;
 	top: 10px;
@@ -27,6 +36,7 @@ h1 {
 	display: block; /* Initially visible */
 }
 
+/* Bingo Grid Layout */
 #bingo-grid {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -36,24 +46,26 @@ h1 {
 }
 
 #bingo-grid div {
-	padding: 20px;
-	border: 1px solid #ddd;
 	background-color: #fff;
+	padding: 20px;
 	font-size: 1.2rem;
-	cursor: pointer;
-	text-align: center;
+	border: 2px solid #ddd;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100px;
+	cursor: pointer;
 	transition: background-color 0.3s ease, color 0.3s ease;
+	word-wrap: break-word;
 }
 
+/* Highlight when a cell is selected */
 #bingo-grid div.selected {
 	background-color: #1e90ff;
 	color: white;
 }
 
+/* Button Styling */
 button {
 	margin-top: 20px;
 	padding: 10px 20px;
@@ -70,13 +82,51 @@ button:hover {
 	background-color: #218838;
 }
 
+/* Bingo Callout (Visible when Bingo is achieved) */
 #bingo-callout {
 	font-size: 1.5rem;
 	color: #28a745;
 	margin-top: 20px;
 }
 
-button:disabled {
-	background-color: #ccc;
-	cursor: not-allowed;
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+	#bingo-grid {
+		grid-template-columns: repeat(5, 1fr);
+		grid-template-rows: repeat(5, 1fr);
+		gap: 8px;
+	}
+
+	#bingo-grid div {
+		font-size: 1rem;
+		padding: 15px;
+		height: 80px;
+	}
+
+	button {
+		width: 100%;
+	}
+}
+
+/* Center the elements and make sure everything looks clean */
+@media (max-width: 500px) {
+	h1 {
+		font-size: 2rem;
+	}
+
+	#bingo-grid {
+		grid-template-columns: repeat(5, 1fr);
+		grid-template-rows: repeat(5, 1fr);
+	}
+
+	button {
+		font-size: 1rem;
+		padding: 12px;
+	}
+
+	#bingo-grid div {
+		font-size: 1rem;
+		padding: 10px;
+		height: 70px;
+	}
 }
