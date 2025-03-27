@@ -1,10 +1,20 @@
 let facts = [];
+let githubUrl = ""; // Variable to hold the GitHub URL
 let bingoGrid = [];
 let selectedCells = Array(5)
 	.fill()
 	.map(() => Array(5).fill(false));
 
 window.onload = function () {
+	// Load the config file for the GitHub URL
+	fetch("config.json")
+		.then((response) => response.json())
+		.then((config) => {
+			githubUrl = config.githubUrl;
+			generateQRCode(); // Generate QR code after loading the URL
+		})
+		.catch((error) => console.error("Error loading config file:", error));
+
 	// Load facts from the external JSON file
 	fetch("facts.json")
 		.then((response) => response.json())
@@ -51,7 +61,7 @@ function generateBingo() {
 	// Hide the "Generate Bingo Card" button
 	document.getElementById("generate-button").style.display = "none";
 
-	// Hide the QR code after generating the Bingo card
+	// Remove the QR code after generating the Bingo card
 	document.getElementById("qr-code").style.display = "none";
 
 	// Show the bingo callout
@@ -105,8 +115,12 @@ function saveAsPDF() {
 
 // QR Code for GitHub Page
 function generateQRCode() {
+	if (!githubUrl) {
+		console.error("GitHub URL is not loaded yet");
+		return;
+	}
+
 	const qrCodeElement = document.getElementById("qr-code");
-	const githubUrl = "YOUR_GITHUB_PAGE_URL"; // Replace with your GitHub Page link
 	const qrCodeImg = new Image();
 	qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
 		githubUrl
@@ -114,5 +128,18 @@ function generateQRCode() {
 	qrCodeElement.appendChild(qrCodeImg);
 }
 
-// Call the QR Code generation when the page loads
-generateQRCode();
+// Function to capture the screenshot and allow image download
+function captureScreenshotAndDownload() {
+	html2canvas(document.body).then((canvas) => {
+		// Create an image from the canvas
+		const imageUrl = canvas.toDataURL("image/png");
+
+		// Create a download link
+		const link = document.createElement("a");
+		link.href = imageUrl;
+		link.download = "bingo_card.png";
+
+		// Trigger download
+		link.click();
+	});
+}

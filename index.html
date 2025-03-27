@@ -4,21 +4,33 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>FUN FACTS BINGO!</title>
-		<link rel="stylesheet" href="styles.css" />
+		<link rel="stylesheet" href="style.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 	</head>
 	<body>
-		<div class="container">
+		<div id="container">
 			<h1>FUN FACTS BINGO!</h1>
+
+			<!-- QR Code Section -->
 			<div id="qr-code"></div>
+
+			<!-- Generate Bingo Card Button -->
 			<button id="generate-button" onclick="generateBingo()">
 				Generate Bingo Card
 			</button>
-			<div id="bingo-callout"></div>
-			<div id="bingo-grid" class="bingo-grid"></div>
-			<button onclick="saveAsPDF()">Save Bingo Card as PDF</button>
+
+			<!-- Bingo Callout -->
+			<div id="bingo-callout" style="display: none"></div>
+
+			<!-- Bingo Grid -->
+			<div id="bingo-grid" class="grid"></div>
+
+			<!-- Screenshot Download Button -->
+			<button onclick="captureScreenshotAndDownload()">
+				Download Screenshot
+			</button>
 		</div>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 		<script src="script.js"></script>
 	</body>
 </html>
