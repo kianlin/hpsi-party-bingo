@@ -4,7 +4,6 @@
 		"Had braces",
 		"Has broken a bone",
 		"Is left-handed",
-		"Has more than two siblings",
 		"Can roll their tongue",
 		"Has travelled to more than five countries",
 		"Speaks more than two languages",
@@ -28,7 +27,7 @@
 		"Has won money in a lottery",
 		"Plays team sports",
 		"Goes to gym 3x a week",
-		"Participated in SEAG or other Major Games",
+		"Have a Major Game Official Attire",
 		"Has coached a sports team",
 		"Can do 30 push-ups NOW",
 		"Has been on TV",
@@ -43,7 +42,6 @@
 		"Has been snorkeling",
 		"Has ridden a horse",
 		"Has been on a cruise",
-		"Has been published",
 		"Has organised an event",
 		"Has learned a new skill recently",
 		"Has achieved a personal goal",
@@ -51,10 +49,14 @@
 		"Knows how to knit or crochet",
 		"Has eaten at a Michelin star restaurant",
 		"Has never been to Disneyland",
-		"Uses a flip phone",
+		"Used to own a flip phone",
 		"Can speak in different accents",
 		"Can do mental math quickly",
 		"Can do a headstand",
-		"Has performed CPR"
+		"First-aid or CPR/AED certified",
+		"Love coriander",
+		"Brain rot a lot",
+		"Can cook more than 5 dishes",
+		"Can bend down and touch my toes"
 	]
 }
